@@ -4,40 +4,72 @@
     :close-on-click-modal="false"
     :visible.sync="visible">
     <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="80px">
-    <el-form-item label="支付方式ID" prop="payId">
+
+    <!-- <el-form-item label="支付方式ID" prop="payId">
       <el-input v-model="dataForm.payId" placeholder="支付方式ID"></el-input>
     </el-form-item>
     <el-form-item label="支付方式名称" prop="payName">
       <el-input v-model="dataForm.payName" placeholder="支付方式名称"></el-input>
+    </el-form-item> -->
+
+    <el-form-item label="支付方式" prop="payId">
+      <!-- <el-input v-model="dataForm.cardholderId" placeholder="持卡人ID"></el-input> -->
+      <el-select v-model="dataForm.payId" placeholder="请选择">
+        <el-option
+          v-for="item in pays"
+          :key="item.id"
+          :label="item.payName"
+          :value="item.id">
+        </el-option>
+      </el-select>
     </el-form-item>
-    <el-form-item label="账号ID" prop="cardId">
+
+    <!-- <el-form-item label="账号ID" prop="cardId">
       <el-input v-model="dataForm.cardId" placeholder="账号ID"></el-input>
     </el-form-item>
     <el-form-item label="账号名称" prop="cardName">
       <el-input v-model="dataForm.cardName" placeholder="账号名称"></el-input>
+    </el-form-item> -->
+
+    <el-form-item label="账号" prop="cardId">
+      <!-- <el-input v-model="dataForm.cardholderId" placeholder="持卡人ID"></el-input> -->
+      <el-select v-model="dataForm.cardId" placeholder="请选择" @change="selectChanged">
+        <el-option
+          v-for="item in cards"
+          :key="item.id"
+          :label="item.cardName"
+          :value="item.id">
+        </el-option>
+      </el-select>
     </el-form-item>
+
     <el-form-item label="账号" prop="cardNumber">
       <el-input v-model="dataForm.cardNumber" placeholder="账号"></el-input>
     </el-form-item>
-    <el-form-item label="账号所属人ID" prop="cardholderId">
+
+    <!-- <el-form-item label="账号所属人ID" prop="cardholderId">
       <el-input v-model="dataForm.cardholderId" placeholder="账号所属人ID"></el-input>
-    </el-form-item>
+    </el-form-item> -->
+
     <el-form-item label="账号所属人" prop="cardholder">
       <el-input v-model="dataForm.cardholder" placeholder="账号所属人"></el-input>
     </el-form-item>
-    <el-form-item label="绑定关系" prop="bindRelation">
+    
+    <!-- <el-form-item label="绑定关系" prop="bindRelation">
       <el-input v-model="dataForm.bindRelation" placeholder="绑定关系"></el-input>
-    </el-form-item>
-    <el-form-item label="绑定时间" prop="bindTime">
+    </el-form-item> -->
+
+    <!-- <el-form-item label="绑定时间" prop="bindTime">
       <el-input v-model="dataForm.bindTime" placeholder="绑定时间"></el-input>
     </el-form-item>
     <el-form-item label="解绑时间" prop="unbindTime">
       <el-input v-model="dataForm.unbindTime" placeholder="解绑时间"></el-input>
-    </el-form-item>
+    </el-form-item> -->
     <el-form-item label="备注" prop="description">
       <el-input v-model="dataForm.description" placeholder="备注"></el-input>
     </el-form-item>
-    <el-form-item label="创建人ID" prop="createrId">
+
+    <!-- <el-form-item label="创建人ID" prop="createrId">
       <el-input v-model="dataForm.createrId" placeholder="创建人ID"></el-input>
     </el-form-item>
     <el-form-item label="创建人" prop="creater">
@@ -63,7 +95,7 @@
     </el-form-item>
     <el-form-item label="检索首字母" prop="firstLetter">
       <el-input v-model="dataForm.firstLetter" placeholder="检索首字母"></el-input>
-    </el-form-item>
+    </el-form-item> -->
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button @click="visible = false">取消</el-button>
@@ -76,6 +108,8 @@
   export default {
     data () {
       return {
+        pays:[],
+        cards:[],
         visible: false,
         dataForm: {
           id: 0,
@@ -102,37 +136,37 @@
         },
         dataRule: {
           payId: [
-            { required: true, message: '支付方式ID不能为空', trigger: 'blur' }
+            { required: false, message: '支付方式ID不能为空', trigger: 'blur' }
           ],
           payName: [
             { required: true, message: '支付方式名称不能为空', trigger: 'blur' }
           ],
           cardId: [
-            { required: true, message: '账号ID不能为空', trigger: 'blur' }
+            { required: false, message: '账号ID不能为空', trigger: 'blur' }
           ],
           cardName: [
             { required: true, message: '账号名称不能为空', trigger: 'blur' }
           ],
           cardNumber: [
-            { required: true, message: '账号不能为空', trigger: 'blur' }
+            { required: false, message: '账号不能为空', trigger: 'blur' }
           ],
           cardholderId: [
             { required: true, message: '账号所属人ID不能为空', trigger: 'blur' }
           ],
           cardholder: [
-            { required: true, message: '账号所属人不能为空', trigger: 'blur' }
+            { required: false, message: '账号所属人不能为空', trigger: 'blur' }
           ],
           bindRelation: [
             { required: true, message: '绑定关系不能为空', trigger: 'blur' }
           ],
           bindTime: [
-            { required: true, message: '绑定时间不能为空', trigger: 'blur' }
+            { required: false, message: '绑定时间不能为空', trigger: 'blur' }
           ],
           unbindTime: [
-            { required: true, message: '解绑时间不能为空', trigger: 'blur' }
+            { required: false, message: '解绑时间不能为空', trigger: 'blur' }
           ],
           description: [
-            { required: true, message: '备注不能为空', trigger: 'blur' }
+            { required: false, message: '备注不能为空', trigger: 'blur' }
           ],
           createrId: [
             { required: true, message: '创建人ID不能为空', trigger: 'blur' }
@@ -166,6 +200,8 @@
     },
     methods: {
       init (id) {
+        this.getPays();
+        this.getCards();
         this.dataForm.id = id || 0
         this.visible = true
         this.$nextTick(() => {
@@ -249,6 +285,49 @@
             })
           }
         })
+      },
+      getPays(){
+        //发送请求获取当前节点最新的数据
+      this.$http({
+        url: this.$http.adornUrl('/base/pay/payVos'),
+        method: "get"
+      })
+        .then(({ data }) => {
+          //请求成功
+          // console.log("要回显的数据", data);
+          this.pays=data.data;
+        })
+        .catch(() => {});
+      },
+      getCards(){
+        //发送请求获取当前节点最新的数据
+        this.$http({
+          url: this.$http.adornUrl('/base/card/cardVos'),
+          method: "get"
+        })
+        .then(({ data }) => {
+          //请求成功
+          // console.log("要回显的数据", data);
+          this.cards=data.data;
+        })
+        .catch(() => {});
+      },
+      selectChanged(){
+        //发送请求获取当前节点最新的数据
+        this.$http({
+          url: this.$http.adornUrl(`/base/card/info/${this.dataForm.cardId}`),
+          method: "get"
+        })
+        .then(({ data }) => {
+          //请求成功
+          // console.log("要回显的数据", data);
+          // alert(data.card.cardName);
+          this.dataForm.cardNumber=data.card.cardNumber;
+          // this.dataForm.cardholderId=data.card.cardholderId;
+          this.dataForm.cardholder=data.card.cardholder;
+          // this.cards=data.card;
+        })
+        .catch(() => {});
       }
     }
   }

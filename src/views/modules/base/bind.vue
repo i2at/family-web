@@ -6,8 +6,8 @@
       </el-form-item>
       <el-form-item>
         <el-button @click="getDataList()">查询</el-button>
-        <el-button v-if="isAuth('base:bind:save')" type="primary" @click="addOrUpdateHandle()">新增</el-button>
-        <el-button v-if="isAuth('base:bind:delete')" type="danger" @click="deleteHandle()" :disabled="dataListSelections.length <= 0">批量删除</el-button>
+        <el-button type="primary" @click="addOrUpdateHandle()">新增</el-button>
+        <el-button type="danger" @click="deleteHandle()" :disabled="dataListSelections.length <= 0">批量删除</el-button>
       </el-form-item>
     </el-form>
     <el-table
@@ -28,24 +28,26 @@
         align="center"
         label="序号">
       </el-table-column>
-      <el-table-column
+
+      <!-- <el-table-column
         prop="payId"
         header-align="center"
         align="center"
         label="支付方式ID">
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column
         prop="payName"
         header-align="center"
         align="center"
-        label="支付方式名称">
+        label="支付方式">
       </el-table-column>
-      <el-table-column
+
+      <!-- <el-table-column
         prop="cardId"
         header-align="center"
         align="center"
         label="账号ID">
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column
         prop="cardName"
         header-align="center"
@@ -58,12 +60,13 @@
         align="center"
         label="账号">
       </el-table-column>
-      <el-table-column
+
+      <!-- <el-table-column
         prop="cardholderId"
         header-align="center"
         align="center"
         label="账号所属人ID">
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column
         prop="cardholder"
         header-align="center"
@@ -74,7 +77,7 @@
         prop="bindRelation"
         header-align="center"
         align="center"
-        label="绑定关系">
+        label="状态">
       </el-table-column>
       <el-table-column
         prop="bindTime"
@@ -94,7 +97,8 @@
         align="center"
         label="备注">
       </el-table-column>
-      <el-table-column
+
+      <!-- <el-table-column
         prop="createrId"
         header-align="center"
         align="center"
@@ -147,7 +151,8 @@
         header-align="center"
         align="center"
         label="检索首字母">
-      </el-table-column>
+      </el-table-column> -->
+
       <el-table-column
         fixed="right"
         header-align="center"

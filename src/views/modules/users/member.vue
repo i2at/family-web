@@ -65,7 +65,7 @@
         prop="birthDate"
         header-align="center"
         align="center"
-        width="110"
+        width="120"
         label="出生日期">
       </el-table-column>
       <el-table-column
