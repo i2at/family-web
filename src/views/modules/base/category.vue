@@ -6,8 +6,8 @@
       </el-form-item>
       <el-form-item>
         <el-button @click="getDataList()">查询</el-button>
-        <el-button v-if="isAuth('base:category:save')" type="primary" @click="addOrUpdateHandle()">新增</el-button>
-        <el-button v-if="isAuth('base:category:delete')" type="danger" @click="deleteHandle()" :disabled="dataListSelections.length <= 0">批量删除</el-button>
+        <el-button type="primary" @click="addOrUpdateHandle()">新增</el-button>
+        <el-button type="danger" @click="deleteHandle()" :disabled="dataListSelections.length <= 0">批量删除</el-button>
       </el-form-item>
     </el-form>
     <el-table
@@ -26,15 +26,17 @@
         prop="catId"
         header-align="center"
         align="center"
-        label="分类id">
+        width="170"
+        label="序号">
       </el-table-column>
       <el-table-column
         prop="name"
         header-align="center"
         align="center"
-        label="分类名称">
+        label="名称">
       </el-table-column>
-      <el-table-column
+      
+      <!-- <el-table-column
         prop="parentCid"
         header-align="center"
         align="center"
@@ -75,7 +77,7 @@
         header-align="center"
         align="center"
         label="商品数量">
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column
         fixed="right"
         header-align="center"

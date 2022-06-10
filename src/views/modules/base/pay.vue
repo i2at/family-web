@@ -26,6 +26,7 @@
         prop="id"
         header-align="center"
         align="center"
+        width="170"
         label="序号">
       </el-table-column>
       <el-table-column

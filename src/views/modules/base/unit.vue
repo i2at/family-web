@@ -6,8 +6,8 @@
       </el-form-item>
       <el-form-item>
         <el-button @click="getDataList()">查询</el-button>
-        <el-button v-if="isAuth('base:unit:save')" type="primary" @click="addOrUpdateHandle()">新增</el-button>
-        <el-button v-if="isAuth('base:unit:delete')" type="danger" @click="deleteHandle()" :disabled="dataListSelections.length <= 0">批量删除</el-button>
+        <el-button type="primary" @click="addOrUpdateHandle()">新增</el-button>
+        <el-button type="danger" @click="deleteHandle()" :disabled="dataListSelections.length <= 0">批量删除</el-button>
       </el-form-item>
     </el-form>
     <el-table
@@ -26,13 +26,14 @@
         prop="id"
         header-align="center"
         align="center"
+        width="170"
         label="序号">
       </el-table-column>
       <el-table-column
         prop="unitName"
         header-align="center"
         align="center"
-        label="克,千克,斤">
+        label="名称">
       </el-table-column>
       <el-table-column
         prop="unitNumber"
@@ -46,12 +47,14 @@
         align="center"
         label="备注">
       </el-table-column>
-      <el-table-column
+
+      <!-- <el-table-column
         prop="createrId"
         header-align="center"
         align="center"
         label="创建人ID">
-      </el-table-column>
+      </el-table-column> -->
+
       <el-table-column
         prop="creater"
         header-align="center"
@@ -62,9 +65,11 @@
         prop="createTime"
         header-align="center"
         align="center"
+        width="158"
         label="创建时间">
       </el-table-column>
-      <el-table-column
+
+      <!-- <el-table-column
         prop="updaterId"
         header-align="center"
         align="center"
@@ -99,7 +104,7 @@
         header-align="center"
         align="center"
         label="检索首字母">
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column
         fixed="right"
         header-align="center"

@@ -7,7 +7,7 @@
     <el-form-item label="分类名称" prop="name">
       <el-input v-model="dataForm.name" placeholder="分类名称"></el-input>
     </el-form-item>
-    <el-form-item label="父分类id" prop="parentCid">
+    <!-- <el-form-item label="父分类id" prop="parentCid">
       <el-input v-model="dataForm.parentCid" placeholder="父分类id"></el-input>
     </el-form-item>
     <el-form-item label="层级" prop="catLevel">
@@ -27,7 +27,7 @@
     </el-form-item>
     <el-form-item label="商品数量" prop="productCount">
       <el-input v-model="dataForm.productCount" placeholder="商品数量"></el-input>
-    </el-form-item>
+    </el-form-item> -->
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button @click="visible = false">取消</el-button>

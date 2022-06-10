@@ -26,6 +26,7 @@
         prop="id"
         header-align="center"
         align="center"
+        width="170"
         label="序号">
       </el-table-column>
 
@@ -83,14 +84,17 @@
         prop="bindTime"
         header-align="center"
         align="center"
+        width="158"
         label="绑定时间">
       </el-table-column>
-      <el-table-column
+
+      <!-- <el-table-column
         prop="unbindTime"
         header-align="center"
         align="center"
         label="解绑时间">
-      </el-table-column>
+      </el-table-column> -->
+
       <el-table-column
         prop="description"
         header-align="center"
@@ -162,6 +166,7 @@
         <template slot-scope="scope">
           <el-button type="text" size="small" @click="addOrUpdateHandle(scope.row.id)">修改</el-button>
           <el-button type="text" size="small" @click="deleteHandle(scope.row.id)">删除</el-button>
+          <el-button type="text" size="small" @click="unBind(scope.row.id)">解绑</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -259,6 +264,36 @@
         }).then(() => {
           this.$http({
             url: this.$http.adornUrl('/base/bind/delete'),
+            method: 'post',
+            data: this.$http.adornData(ids, false)
+          }).then(({data}) => {
+            if (data && data.code === 0) {
+              this.$message({
+                message: '操作成功',
+                type: 'success',
+                duration: 1500,
+                onClose: () => {
+                  this.getDataList()
+                }
+              })
+            } else {
+              this.$message.error(data.msg)
+            }
+          })
+        })
+      },
+      // 解绑
+      unBind (id) {
+        var ids = id ? [id] : this.dataListSelections.map(item => {
+          return item.id
+        })
+        this.$confirm(`确定对[id=${ids.join(',')}]进行[${id ? '解绑' : '批量解绑'}]操作?`, '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$http({
+            url: this.$http.adornUrl('/base/bind/unBind'),
             method: 'post',
             data: this.$http.adornData(ids, false)
           }).then(({data}) => {
