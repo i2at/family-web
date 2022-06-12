@@ -165,25 +165,26 @@
         header-align="center"
         align="center"
         label="创建人ID">
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column
         prop="creater"
         header-align="center"
         align="center"
-        label="创建人名字">
+        label="创建人">
       </el-table-column>
       <el-table-column
         prop="createTime"
         header-align="center"
         align="center"
+        width="158"
         label="创建时间">
       </el-table-column>
-      <el-table-column
+      <!-- <el-table-column
         prop="updaterId"
         header-align="center"
         align="center"
         label="修改人ID">
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column
         prop="updater"
         header-align="center"
@@ -194,9 +195,10 @@
         prop="updateTime"
         header-align="center"
         align="center"
+        width="158"
         label="修改时间">
       </el-table-column>
-      <el-table-column
+      <!-- <el-table-column
         prop="showStatus"
         header-align="center"
         align="center"
@@ -207,7 +209,7 @@
         header-align="center"
         align="center"
         label="排序">
-      </el-table-column>
+      </el-table-column> 
       <el-table-column
         prop="firstLetter"
         header-align="center"

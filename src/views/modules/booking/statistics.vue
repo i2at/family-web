@@ -6,8 +6,8 @@
       </el-form-item>
       <el-form-item>
         <el-button @click="getDataList()">查询</el-button>
-        <el-button v-if="isAuth('booking:statistics:save')" type="primary" @click="addOrUpdateHandle()">新增</el-button>
-        <el-button v-if="isAuth('booking:statistics:delete')" type="danger" @click="deleteHandle()" :disabled="dataListSelections.length <= 0">批量删除</el-button>
+        <el-button type="primary" @click="addOrUpdateHandle()">新增</el-button>
+        <el-button type="danger" @click="deleteHandle()" :disabled="dataListSelections.length <= 0">批量删除</el-button>
       </el-form-item>
     </el-form>
     <el-table
@@ -26,49 +26,53 @@
         prop="id"
         header-align="center"
         align="center"
+        width="170"
         label="序号">
       </el-table-column>
-      <el-table-column
+
+      <!-- <el-table-column
         prop="cardId"
         header-align="center"
         align="center"
         label="银行卡ID">
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column
         prop="cardName"
         header-align="center"
         align="center"
-        label="银行卡名称">
+        label="账号名称">
       </el-table-column>
       <el-table-column
         prop="cardNumber"
         header-align="center"
         align="center"
-        label="银行卡卡号">
+        width="150"
+        label="账号">
       </el-table-column>
       <el-table-column
         prop="cardUser"
         header-align="center"
         align="center"
-        label="银行卡持卡人">
+        width="100"
+        label="账号所属人">
       </el-table-column>
       <el-table-column
         prop="cardInitMoney"
         header-align="center"
         align="center"
-        label="银行卡初始金额">
+        label="初始金额">
       </el-table-column>
       <el-table-column
         prop="cardCheckMoney"
         header-align="center"
         align="center"
-        label="银行卡盘点金额">
+        label="盘点金额">
       </el-table-column>
       <el-table-column
         prop="cardRealMoney"
         header-align="center"
         align="center"
-        label="银行卡实际金额">
+        label="实际金额">
       </el-table-column>
       <el-table-column
         prop="statisticsStatus"
@@ -80,7 +84,7 @@
         prop="statisticsMoney"
         header-align="center"
         align="center"
-        label="盘点差异金额">
+        label="差异金额">
       </el-table-column>
       <el-table-column
         prop="statisticsUserId"
@@ -98,51 +102,55 @@
         prop="statisticsTime"
         header-align="center"
         align="center"
+        width="158"
         label="盘点时间">
       </el-table-column>
       <el-table-column
         prop="description"
         header-align="center"
         align="center"
+        width="600"
         label="备注">
       </el-table-column>
-      <el-table-column
+      <!-- <el-table-column
         prop="createrId"
         header-align="center"
         align="center"
         label="创建人ID">
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column
         prop="creater"
         header-align="center"
         align="center"
-        label="创建人名字">
+        label="创建人">
       </el-table-column>
       <el-table-column
         prop="createTime"
         header-align="center"
         align="center"
+        width="158"
         label="创建时间">
       </el-table-column>
-      <el-table-column
+      <!-- <el-table-column
         prop="updaterId"
         header-align="center"
         align="center"
         label="修改人ID">
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column
         prop="updater"
         header-align="center"
         align="center"
-        label="修改人名字">
+        label="修改人">
       </el-table-column>
       <el-table-column
         prop="updateTime"
         header-align="center"
         align="center"
+        width="158"
         label="修改时间">
       </el-table-column>
-      <el-table-column
+      <!-- <el-table-column
         prop="showStatus"
         header-align="center"
         align="center"
@@ -159,7 +167,7 @@
         header-align="center"
         align="center"
         label="检索首字母">
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column
         fixed="right"
         header-align="center"
@@ -169,6 +177,7 @@
         <template slot-scope="scope">
           <el-button type="text" size="small" @click="addOrUpdateHandle(scope.row.id)">修改</el-button>
           <el-button type="text" size="small" @click="deleteHandle(scope.row.id)">删除</el-button>
+          <!-- <el-button type="text" size="small" @click="statistics(scope.row.id)">盘点</el-button> -->
         </template>
       </el-table-column>
     </el-table>
@@ -266,6 +275,36 @@
         }).then(() => {
           this.$http({
             url: this.$http.adornUrl('/booking/statistics/delete'),
+            method: 'post',
+            data: this.$http.adornData(ids, false)
+          }).then(({data}) => {
+            if (data && data.code === 0) {
+              this.$message({
+                message: '操作成功',
+                type: 'success',
+                duration: 1500,
+                onClose: () => {
+                  this.getDataList()
+                }
+              })
+            } else {
+              this.$message.error(data.msg)
+            }
+          })
+        })
+      },
+      // 解绑
+      statistics (id) {
+        var ids = id ? [id] : this.dataListSelections.map(item => {
+          return item.id
+        })
+        this.$confirm(`确定对[id=${ids.join(',')}]进行[${id ? '盘点' : '批量盘点'}]操作?`, '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$http({
+            url: this.$http.adornUrl('/booking/statistics/statistics'),
             method: 'post',
             data: this.$http.adornData(ids, false)
           }).then(({data}) => {

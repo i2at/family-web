@@ -26,62 +26,67 @@
         prop="id"
         header-align="center"
         align="center"
+        width="170"
         label="序号">
       </el-table-column>
-      <el-table-column
+
+      <!-- <el-table-column
         prop="cardId"
         header-align="center"
         align="center"
         label="银行卡ID">
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column
         prop="cardName"
         header-align="center"
         align="center"
-        label="银行卡名称">
+        label="账号名称">
       </el-table-column>
       <el-table-column
         prop="cardNumber"
         header-align="center"
         align="center"
-        label="银行卡卡号">
+        label="账号">
       </el-table-column>
       <el-table-column
         prop="changeMoney"
         header-align="center"
         align="center"
-        label="交易金额">
+        label="金额">
       </el-table-column>
-      <el-table-column
+
+      <!-- <el-table-column
         prop="changeId"
         header-align="center"
         align="center"
         label="交易类型表ID">
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column
         prop="changeName"
         header-align="center"
         align="center"
-        label="交易类型名称">
+        label="交易类型">
       </el-table-column>
-      <el-table-column
+
+      <!-- <el-table-column
         prop="payId"
         header-align="center"
         align="center"
         label="支付类型ID">
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column
         prop="payName"
         header-align="center"
         align="center"
-        label="支付类型名称">
+        label="交易方式">
       </el-table-column>
-      <el-table-column
+
+      <!-- <el-table-column
         prop="memberId"
         header-align="center"
         align="center"
         label="交易人ID">
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column
         prop="memberName"
         header-align="center"
@@ -92,57 +97,62 @@
         prop="thing"
         header-align="center"
         align="center"
+        width="300"
         label="交易内容">
       </el-table-column>
       <el-table-column
         prop="changeTime"
         header-align="center"
         align="center"
+        width="158"
         label="交易时间">
       </el-table-column>
       <el-table-column
         prop="description"
         header-align="center"
         align="center"
+        width="300"
         label="备注">
       </el-table-column>
-      <el-table-column
+      <!-- <el-table-column
         prop="createrId"
         header-align="center"
         align="center"
         label="创建人ID">
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column
         prop="creater"
         header-align="center"
         align="center"
-        label="创建人名字">
+        label="创建人">
       </el-table-column>
       <el-table-column
         prop="createTime"
         header-align="center"
         align="center"
+        width="158"
         label="创建时间">
       </el-table-column>
-      <el-table-column
+      <!-- <el-table-column
         prop="updaterId"
         header-align="center"
         align="center"
         label="修改人ID">
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column
         prop="updater"
         header-align="center"
         align="center"
-        label="修改人名字">
+        label="修改人">
       </el-table-column>
       <el-table-column
         prop="updateTime"
         header-align="center"
         align="center"
+        width="158"
         label="修改时间">
       </el-table-column>
-      <el-table-column
+      <!-- <el-table-column
         prop="showStatus"
         header-align="center"
         align="center"
@@ -153,13 +163,13 @@
         header-align="center"
         align="center"
         label="排序">
-      </el-table-column>
+      </el-table-column> 
       <el-table-column
         prop="firstLetter"
         header-align="center"
         align="center"
         label="检索首字母">
-      </el-table-column>
+      </el-table-column>-->
       <el-table-column
         fixed="right"
         header-align="center"

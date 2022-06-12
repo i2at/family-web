@@ -3,47 +3,66 @@
     :title="!dataForm.id ? '新增' : '修改'"
     :close-on-click-modal="false"
     :visible.sync="visible">
-    <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="80px">
-    <el-form-item label="银行卡ID" prop="cardId">
+    <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="100px">
+    <!-- <el-form-item label="银行卡ID" prop="cardId">
       <el-input v-model="dataForm.cardId" placeholder="银行卡ID"></el-input>
+    </el-form-item> -->
+
+    <el-form-item label="账号名称" prop="cardId">
+      <el-select v-model="dataForm.cardId" placeholder="请选择" @change="selectChanged">
+        <el-option
+          v-for="item in cards"
+          :key="item.id"
+          :label="item.cardName"
+          :value="item.id">
+        </el-option>
+      </el-select>
     </el-form-item>
-    <el-form-item label="银行卡名称" prop="cardName">
+
+    <!-- <el-form-item label="银行卡名称" prop="cardName">
       <el-input v-model="dataForm.cardName" placeholder="银行卡名称"></el-input>
-    </el-form-item>
-    <el-form-item label="银行卡卡号" prop="cardNumber">
+    </el-form-item> -->
+    <el-form-item label="账号" prop="cardNumber">
       <el-input v-model="dataForm.cardNumber" placeholder="银行卡卡号"></el-input>
     </el-form-item>
-    <el-form-item label="银行卡持卡人" prop="cardUser">
+    <el-form-item label="账号所属人" prop="cardUser">
       <el-input v-model="dataForm.cardUser" placeholder="银行卡持卡人"></el-input>
     </el-form-item>
-    <el-form-item label="银行卡初始金额" prop="cardInitMoney">
+
+    <!-- <el-form-item label="银行卡初始金额" prop="cardInitMoney">
       <el-input v-model="dataForm.cardInitMoney" placeholder="银行卡初始金额"></el-input>
-    </el-form-item>
-    <el-form-item label="银行卡盘点金额" prop="cardCheckMoney">
+    </el-form-item> -->
+
+    <!-- <el-form-item label="银行卡盘点金额" prop="cardCheckMoney">
       <el-input v-model="dataForm.cardCheckMoney" placeholder="银行卡盘点金额"></el-input>
-    </el-form-item>
+    </el-form-item> -->
     <el-form-item label="银行卡实际金额" prop="cardRealMoney">
       <el-input v-model="dataForm.cardRealMoney" placeholder="银行卡实际金额"></el-input>
     </el-form-item>
-    <el-form-item label="盘点状态" prop="statisticsStatus">
+
+    <!-- <el-form-item label="盘点状态" prop="statisticsStatus">
       <el-input v-model="dataForm.statisticsStatus" placeholder="盘点状态"></el-input>
-    </el-form-item>
-    <el-form-item label="盘点差异金额" prop="statisticsMoney">
+    </el-form-item> -->
+    <!-- <el-form-item label="盘点差异金额" prop="statisticsMoney">
       <el-input v-model="dataForm.statisticsMoney" placeholder="盘点差异金额"></el-input>
-    </el-form-item>
-    <el-form-item label="盘点人ID" prop="statisticsUserId">
+    </el-form-item> -->
+
+    <!-- <el-form-item label="盘点人ID" prop="statisticsUserId">
       <el-input v-model="dataForm.statisticsUserId" placeholder="盘点人ID"></el-input>
     </el-form-item>
     <el-form-item label="盘点人" prop="statisticsUser">
       <el-input v-model="dataForm.statisticsUser" placeholder="盘点人"></el-input>
-    </el-form-item>
-    <el-form-item label="盘点时间" prop="statisticsTime">
+    </el-form-item> -->
+
+    <!-- <el-form-item label="盘点时间" prop="statisticsTime">
       <el-input v-model="dataForm.statisticsTime" placeholder="盘点时间"></el-input>
-    </el-form-item>
-    <el-form-item label="备注" prop="description">
+    </el-form-item> -->
+
+     <!-- <el-form-item label="备注" prop="description">
       <el-input v-model="dataForm.description" placeholder="备注"></el-input>
-    </el-form-item>
-    <el-form-item label="创建人ID" prop="createrId">
+    </el-form-item> -->
+
+    <!--<el-form-item label="创建人ID" prop="createrId">
       <el-input v-model="dataForm.createrId" placeholder="创建人ID"></el-input>
     </el-form-item>
     <el-form-item label="创建人名字" prop="creater">
@@ -69,7 +88,7 @@
     </el-form-item>
     <el-form-item label="检索首字母" prop="firstLetter">
       <el-input v-model="dataForm.firstLetter" placeholder="检索首字母"></el-input>
-    </el-form-item>
+    </el-form-item> -->
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button @click="visible = false">取消</el-button>
@@ -82,6 +101,7 @@
   export default {
     data () {
       return {
+        cards:[],
         visible: false,
         dataForm: {
           id: 0,
@@ -146,7 +166,7 @@
             { required: true, message: '盘点时间不能为空', trigger: 'blur' }
           ],
           description: [
-            { required: true, message: '备注不能为空', trigger: 'blur' }
+            { required: false, message: '备注不能为空', trigger: 'blur' }
           ],
           createrId: [
             { required: true, message: '创建人ID不能为空', trigger: 'blur' }
@@ -180,6 +200,7 @@
     },
     methods: {
       init (id) {
+        this.getCards();
         this.dataForm.id = id || 0
         this.visible = true
         this.$nextTick(() => {
@@ -267,6 +288,36 @@
             })
           }
         })
+      },
+      getCards(){
+        //发送请求获取当前节点最新的数据
+        this.$http({
+          url: this.$http.adornUrl('/booking/statistics/cardsList'),
+          method: "get"
+        })
+          .then(({ data }) => {
+            //请求成功
+            // console.log("要回显的数据", data);
+            this.cards=data.data;
+          })
+        .catch(() => {});
+      },
+      selectChanged(){
+        //发送请求获取当前节点最新的数据
+        this.$http({
+          url: this.$http.adornUrl(`/base/card/info/${this.dataForm.cardId}`),
+          method: "get"
+        })
+        .then(({ data }) => {
+          //请求成功
+          // console.log("要回显的数据", data);
+          // alert(data.card.cardName);
+          this.dataForm.cardNumber=data.card.cardNumber;
+          // this.dataForm.cardholderId=data.card.cardholderId;
+          this.dataForm.cardUser=data.card.cardholder;
+          // this.cards=data.card;
+        })
+        .catch(() => {});
       }
     }
   }
