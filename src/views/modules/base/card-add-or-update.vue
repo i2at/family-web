@@ -13,7 +13,7 @@
 
     <el-form-item label="所属人" prop="cardholderId">
       <!-- <el-input v-model="dataForm.cardholderId" placeholder="持卡人ID"></el-input> -->
-      <el-select v-model="dataForm.cardholderId" placeholder="请选择">
+      <el-select v-model="dataForm.cardholderId" placeholder="请选择" filterable clearable>
         <el-option
           v-for="item in members"
           :key="item.id"
@@ -128,7 +128,11 @@
             { required: false, message: '办理地址不能为空', trigger: 'blur' }
           ],
           cardTelephone: [
-            { required: false, message: '预留电话不能为空', trigger: 'blur' }
+            { required: false, message: '预留电话不能为空', trigger: 'blur' },
+            {
+			        pattern: /^((0\d{2,3}-\d{7,8})|(1[3584]\d{9}))$/,
+			        message: '请输入正确的手机号码或者座机号',
+			      }
           ],
           description: [
             { required: false, message: '备注不能为空', trigger: 'blur' }

@@ -11,7 +11,8 @@
       <el-input v-model="dataForm.memberName" placeholder="姓名"></el-input>
     </el-form-item>
     <el-form-item label="年龄" prop="age">
-      <el-input v-model.number="dataForm.age" placeholder="年龄"></el-input>
+      <el-input v-model.number="dataForm.age" placeholder="年龄，请输入正整数，不超过100" oninput="value=value.replace(/[^\d]/g,'')"
+ maxLength='2'></el-input>
     </el-form-item>
 
     <el-form-item label="性别" prop="sex">
@@ -55,7 +56,7 @@
       <el-input v-model="dataForm.address" placeholder="现住址"></el-input>
     </el-form-item>
     <el-form-item label="电话" prop="tel">
-      <el-input v-model.number="dataForm.tel" placeholder="电话"></el-input>
+      <el-input v-model.number="dataForm.tel" placeholder="电话" maxlength="11" clearable></el-input>
     </el-form-item>
     <el-form-item label="座机" prop="mobile">
       <el-input v-model.number="dataForm.mobile" placeholder="座机"></el-input>
@@ -241,13 +242,10 @@
           ],
           tel: [
             { required: false, message: '电话不能为空', trigger: 'blur' },
-            // {
-            //   validator: checkMobile,
-            //   min: 11,
-            //   max: 11,
-            //   message: "手机号格式错误",
-            //   trigger: "blur",
-            // }
+              {
+			        pattern: /^((0\d{2,3}-\d{7,8})|(1[3584]\d{9}))$/,
+			        message: '请输入正确的手机号码或者座机号',
+			        }
           ],
           mobile: [
             { required: false, message: '座机不能为空', trigger: 'blur' },
@@ -261,13 +259,7 @@
           ],
           email: [
             { required: false, message: '邮箱不能为空', trigger: 'blur' },
-            // {
-            //   validator: checkEmail,
-            //   min: 9,
-            //   max: 18,
-            //   message: "邮箱格式错误",
-            //   trigger: "blur",
-            // }
+            { pattern:/^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g, message: "请输入正确的邮箱", trigger: "blur"}
           ],
           weixin: [
             { required: false, message: '微信号不能为空', trigger: 'blur' }

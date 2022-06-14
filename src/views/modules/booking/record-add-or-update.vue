@@ -13,7 +13,7 @@
     </el-form-item> -->
 
     <el-form-item label="商品" prop="categoryId">
-      <el-select v-model="dataForm.categoryId" placeholder="请选择">
+      <el-select v-model="dataForm.categoryId" placeholder="请选择" filterable clearable>
         <el-option
           v-for="item in categorys"
           :key="item.catId"
@@ -32,7 +32,7 @@
     </el-form-item> -->
 
     <el-form-item label="类型" prop="changeId">
-      <el-select v-model="dataForm.changeId" placeholder="请选择">
+      <el-select v-model="dataForm.changeId" placeholder="请选择" clearable>
         <el-option
           v-for="item in changes"
           :key="item.id"
@@ -43,7 +43,7 @@
     </el-form-item>
 
     <el-form-item label="交易类型" prop="bindId">
-      <el-select v-model="dataForm.bindId" placeholder="请选择" @change="selectChanged">
+      <el-select v-model="dataForm.bindId" placeholder="请选择" @change="selectChanged" filterable clearable>
         <el-option
           v-for="item in binds"
           :key="item.id"
@@ -57,20 +57,20 @@
       <el-input v-model="dataForm.payId" placeholder="支付类型表ID"></el-input>
     </el-form-item> -->
     <el-form-item label="交易途径" prop="payName">
-      <el-input v-model="dataForm.payName" placeholder="微信,支付宝,银行卡"></el-input>
+      <el-input v-model="dataForm.payName" placeholder="微信,支付宝,银行卡" :disabled="true" filterable clearable></el-input>
     </el-form-item>
 
     <!-- <el-form-item label="银行卡管理表ID" prop="cardId">
       <el-input v-model="dataForm.cardId" placeholder="银行卡管理表ID"></el-input>
     </el-form-item> -->
     <el-form-item label="账号名称" prop="cardName">
-      <el-input v-model="dataForm.cardName" placeholder="银行卡名称"></el-input>
+      <el-input v-model="dataForm.cardName" placeholder="银行卡名称" :disabled="true"></el-input>
     </el-form-item>
     <el-form-item label="账号" prop="cardNumber">
-      <el-input v-model="dataForm.cardNumber" placeholder="银行卡账号"></el-input>
+      <el-input v-model="dataForm.cardNumber" placeholder="银行卡账号" :disabled="true"></el-input>
     </el-form-item>
     <el-form-item label="账号所属人" prop="cardHolder">
-      <el-input v-model="dataForm.cardHolder" placeholder="银行卡持卡人"></el-input>
+      <el-input v-model="dataForm.cardHolder" placeholder="银行卡持卡人" :disabled="true"></el-input>
     </el-form-item>
 
     <!-- <el-form-item label="单位表ID" prop="unitId">
@@ -81,7 +81,7 @@
     </el-form-item> -->
 
     <el-form-item label="单位" prop="unitId">
-      <el-select v-model="dataForm.unitId" placeholder="请选择">
+      <el-select v-model="dataForm.unitId" placeholder="请选择" filterable clearable>
         <el-option
           v-for="item in units"
           :key="item.id"
@@ -95,10 +95,12 @@
       <el-input v-model="dataForm.priceId" placeholder="历史价格表ID"></el-input>
     </el-form-item> -->
     <el-form-item label="价格" prop="price">
-      <el-input v-model="dataForm.price" placeholder="历史价格"></el-input>
+      <el-input v-model="dataForm.price" placeholder="请输入正整数或小数，最多6位小数，历史价格" oninput="if(isNaN(value)) { value = null } if(value.indexOf('.')>0){value=value.slice(0,value.indexOf('.')+8)}"
+ maxLength='9'></el-input>
     </el-form-item>
     <el-form-item label="数量" prop="quantity">
-      <el-input v-model="dataForm.quantity" placeholder="支出数量,购买数量,使用数量"></el-input>
+      <el-input-number :min="0.1" :step="0.1" v-model="dataForm.quantity" placeholder="请输入正整数或小数，最多6位小数，支出数量,购买数量,使用数量"  oninput="if(isNaN(value)) { value = null } if(value.indexOf('.')>0){value=value.slice(0,value.indexOf('.')+8)}"
+ maxLength='9'></el-input-number>
     </el-form-item>
 
     <!-- <el-form-item label="单条记录总金额" prop="totalAmount">
@@ -114,7 +116,7 @@
     </el-form-item> -->
 
     <el-form-item label="交易人" prop="payUserId">
-      <el-select v-model="dataForm.payUserId" placeholder="请选择">
+      <el-select v-model="dataForm.payUserId" placeholder="请选择" filterable clearable>
         <el-option
           v-for="item in payUsers"
           :key="item.id"

@@ -3,7 +3,7 @@
     :title="!dataForm.id ? '新增' : '修改'"
     :close-on-click-modal="false"
     :visible.sync="visible">
-    <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="80px">
+    <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="90px">
 
     <!-- <el-form-item label="支付方式ID" prop="payId">
       <el-input v-model="dataForm.payId" placeholder="支付方式ID"></el-input>
@@ -14,7 +14,7 @@
 
     <el-form-item label="支付方式" prop="payId">
       <!-- <el-input v-model="dataForm.cardholderId" placeholder="持卡人ID"></el-input> -->
-      <el-select v-model="dataForm.payId" placeholder="请选择">
+      <el-select v-model="dataForm.payId" placeholder="请选择" filterable clearable>
         <el-option
           v-for="item in pays"
           :key="item.id"
@@ -33,7 +33,7 @@
 
     <el-form-item label="账号" prop="cardId">
       <!-- <el-input v-model="dataForm.cardholderId" placeholder="持卡人ID"></el-input> -->
-      <el-select v-model="dataForm.cardId" placeholder="请选择" @change="selectChanged">
+      <el-select v-model="dataForm.cardId" placeholder="请选择" @change="selectChanged" filterable clearable>
         <el-option
           v-for="item in cards"
           :key="item.id"
@@ -44,7 +44,7 @@
     </el-form-item>
 
     <el-form-item label="账号" prop="cardNumber">
-      <el-input v-model="dataForm.cardNumber" placeholder="账号"></el-input>
+      <el-input v-model="dataForm.cardNumber" placeholder="账号" :disabled="true"></el-input>
     </el-form-item>
 
     <!-- <el-form-item label="账号所属人ID" prop="cardholderId">
@@ -52,7 +52,7 @@
     </el-form-item> -->
 
     <el-form-item label="账号所属人" prop="cardholder">
-      <el-input v-model="dataForm.cardholder" placeholder="账号所属人"></el-input>
+      <el-input v-model="dataForm.cardholder" placeholder="账号所属人" :disabled="true"></el-input>
     </el-form-item>
     
     <!-- <el-form-item label="绑定关系" prop="bindRelation">
