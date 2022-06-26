@@ -36,7 +36,7 @@
         label="名称">
       </el-table-column>
       
-      <!-- <el-table-column
+      <el-table-column
         prop="parentCid"
         header-align="center"
         align="center"
@@ -48,7 +48,7 @@
         align="center"
         label="层级">
       </el-table-column>
-      <el-table-column
+      <!-- <el-table-column
         prop="showStatus"
         header-align="center"
         align="center"

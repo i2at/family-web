@@ -9,11 +9,25 @@
     </el-form-item>
     <!-- <el-form-item label="父分类id" prop="parentCid">
       <el-input v-model="dataForm.parentCid" placeholder="父分类id"></el-input>
+    </el-form-item> -->
+
+    <el-form-item label="父分类" prop="parentCid">
+      <!-- <el-input v-model="dataForm.cardholderId" placeholder="持卡人ID"></el-input> -->
+      <el-select v-model="dataForm.parentCid" placeholder="请选择" filterable clearable>
+        <el-option
+          v-for="item in parentCids"
+          :key="item.catId"
+          :label="item.name"
+          :value="item.catId">
+        </el-option>
+      </el-select>
     </el-form-item>
-    <el-form-item label="层级" prop="catLevel">
+
+    <!-- <el-form-item label="层级" prop="catLevel">
       <el-input v-model="dataForm.catLevel" placeholder="层级"></el-input>
-    </el-form-item>
-    <el-form-item label="是否显示[0-不显示，1显示]" prop="showStatus">
+    </el-form-item> -->
+    
+    <!-- <el-form-item label="是否显示[0-不显示，1显示]" prop="showStatus">
       <el-input v-model="dataForm.showStatus" placeholder="是否显示[0-不显示，1显示]"></el-input>
     </el-form-item>
     <el-form-item label="排序" prop="sort">
@@ -40,6 +54,7 @@
   export default {
     data () {
       return {
+        parentCids:[],
         visible: false,
         dataForm: {
           catId: 0,
@@ -57,10 +72,10 @@
             { required: true, message: '分类名称不能为空', trigger: 'blur' }
           ],
           parentCid: [
-            { required: true, message: '父分类id不能为空', trigger: 'blur' }
+            { required: false, message: '父分类id不能为空', trigger: 'blur' }
           ],
           catLevel: [
-            { required: true, message: '层级不能为空', trigger: 'blur' }
+            { required: false, message: '层级不能为空', trigger: 'blur' }
           ],
           showStatus: [
             { required: true, message: '是否显示[0-不显示，1显示]不能为空', trigger: 'blur' }
@@ -82,6 +97,7 @@
     },
     methods: {
       init (id) {
+        this.getParentCids();
         this.dataForm.catId = id || 0
         this.visible = true
         this.$nextTick(() => {
@@ -141,7 +157,20 @@
             })
           }
         })
-      }
+      },
+      getParentCids(){
+        //发送请求获取当前节点最新的数据
+        this.$http({
+          url: this.$http.adornUrl('/base/category/oneList'),
+          method: "get"
+        })
+        .then(({ data }) => {
+          //请求成功
+          // console.log("要回显的数据", data);
+          this.parentCids=data.data;
+        })
+        .catch(() => {});
+      },
     }
   }
 </script>
