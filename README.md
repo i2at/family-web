@@ -1,3 +1,17 @@
+# 前端页面
+
+### 登录页
+
+![](https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202206261014013.png)
+
+### 主页面
+
+![](https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202206262008095.png)
+
+### 记账页面
+
+![](https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202206262011809.png)
+
 # 一、环境搭建
 
 1. ## 切换淘宝镜像：

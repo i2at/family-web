@@ -37,36 +37,63 @@
         chartScatter: null,
         option: {
           title: {
-            text: '总消费分类占比',
-            subtext: '单位:元',
-            left: 'center'
+            text: 'Stacked Line'
+          },
+          tooltip: {
+            trigger: 'axis'
+          },
+          legend: {
+            data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
+          },
+          grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
           },
           toolbox: {
             feature: {
               saveAsImage: {}
             }
           },
-          tooltip: {
-            trigger: 'item'
+          xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
           },
-          legend: {
-            orient: 'vertical',
-            left: 'left'
+          yAxis: {
+            type: 'value'
           },
           series: [
             {
-              name: 'Access From',
-              type: 'pie',
-              radius: '60%',
-              data: [
-              ],
-              emphasis: {
-                itemStyle: {
-                  shadowBlur: 10,
-                  shadowOffsetX: 0,
-                  shadowColor: 'rgba(0, 0, 0, 0.5)'
-                }
-              }
+              name: 'Email',
+              type: 'line',
+              stack: 'Total',
+              data: [120, 132, 101, 134, 90, 230, 210]
+            },
+            {
+              name: 'Union Ads',
+              type: 'line',
+              stack: 'Total',
+              data: [220, 182, 191, 234, 290, 330, 310]
+            },
+            {
+              name: 'Video Ads',
+              type: 'line',
+              stack: 'Total',
+              data: [150, 232, 201, 154, 190, 330, 410]
+            },
+            {
+              name: 'Direct',
+              type: 'line',
+              stack: 'Total',
+              data: [320, 332, 301, 334, 390, 330, 320]
+            },
+            {
+              name: 'Search Engine',
+              type: 'line',
+              stack: 'Total',
+              data: [820, 932, 901, 934, 1290, 1330, 1320]
             }
           ]
         },
@@ -76,7 +103,7 @@
         chartScatterOut: null,
         optionOut: {
             title: {
-              text: '消费变化统计(单位:元/月)'
+              text: '消费(单位:元/月)'
             },
             toolbox: {
               feature: {
@@ -106,7 +133,7 @@
         chartScatterIn: null,
         optionIn: {
           title: {
-              text: '收入变化统计(单位:元/月)'
+              text: '收入(单位:元/月)'
             },
           toolbox: {
             feature: {
@@ -234,7 +261,7 @@
         initChartLine () {
         this.chartLine = echarts.init(document.getElementById('J_chartLineBox'))        
         this.$http({
-        url: this.$http.adornUrl('/booking/record/categoryMoney'),
+        url: this.$http.adornUrl('/booking/record/basicLineChartIn'),
         method: "get"
         })
         .then(({ data }) => {
@@ -244,9 +271,6 @@
           // for(var i=0;i<data.data.data.length;i++){
           //   this.optionIn.series[0].data.push(data.data.data[i]);
           // }
-          // console.log("要回显的数据1",  data.data);
-          // console.log("要回显的数据2",  this.option.series[0].data);
-          this.option.series[0].data=data.data;
 
           this.chartLine.setOption(this.option)
         }).catch(() => {});
