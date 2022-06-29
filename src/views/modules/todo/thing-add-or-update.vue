@@ -153,7 +153,7 @@
             { required: false, message: '状态不能为空', trigger: 'blur' }
           ],
           cycle: [
-            { required: true, message: '周期不能为空', trigger: 'blur' }
+            { required: false, message: '周期不能为空', trigger: 'blur' }
           ],
           beanName: [
             { required: false, message: 'bean名称不能为空', trigger: 'blur' }

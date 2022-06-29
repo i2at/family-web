@@ -64,21 +64,21 @@
         header-align="center"
         align="center"
         width="158"
-        label="计划执行时间">
+        label="计划时间">
       </el-table-column>
       <el-table-column
         prop="upFinishTime"
         header-align="center"
         align="center"
         width="158"
-        label="上次执行时间">
+        label="上次开始时间">
       </el-table-column>
       <el-table-column
         prop="upExecutionTime"
         header-align="center"
         align="center"
         width="158"
-        label="上次执行完成时间">
+        label="上次完成时间">
       </el-table-column>
       <el-table-column
         prop="upResult"
@@ -91,6 +91,7 @@
         prop="consumingTime"
         header-align="center"
         align="center"
+        width="140"
         label="耗时">
       </el-table-column>
       <el-table-column
@@ -98,7 +99,7 @@
         header-align="center"
         align="center"
         width="158"
-        label="下次执行时间">
+        label="下次开始时间">
       </el-table-column>
       <el-table-column
         prop="description"
@@ -187,12 +188,13 @@
         fixed="right"
         header-align="center"
         align="center"
-        width="150"
+        width="200"
         label="操作">
         <template slot-scope="scope">
           <el-button type="text" size="small" @click="addOrUpdateHandle(scope.row.id)">修改</el-button>
           <el-button type="text" size="small" @click="deleteHandle(scope.row.id)">删除</el-button>
-          <el-button type="text" size="small" @click="finish(scope.row.id)">完成</el-button>
+          <el-button type="text" size="small" @click="start(scope.row.id)">开始</el-button>
+          <el-button type="text" size="small" @click="finish(scope.row.id)">结束</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -320,6 +322,36 @@
         }).then(() => {
           this.$http({
             url: this.$http.adornUrl('/todo/thing/finish'),
+            method: 'post',
+            data: this.$http.adornData(ids, false)
+          }).then(({data}) => {
+            if (data && data.code === 0) {
+              this.$message({
+                message: '操作成功',
+                type: 'success',
+                duration: 1500,
+                onClose: () => {
+                  this.getDataList()
+                }
+              })
+            } else {
+              this.$message.error(data.msg)
+            }
+          })
+        })
+      },
+      // 开始任务
+      start (id) {
+        var ids = id ? [id] : this.dataListSelections.map(item => {
+          return item.id
+        })
+        this.$confirm(`确定对[id=${ids.join(',')}]进行[${id ? '开始任务' : '批量开始任务'}]操作?`, '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$http({
+            url: this.$http.adornUrl('/todo/thing/start'),
             method: 'post',
             data: this.$http.adornData(ids, false)
           }).then(({data}) => {
