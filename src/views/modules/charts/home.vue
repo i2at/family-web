@@ -211,7 +211,8 @@
         //发送请求获取当前节点最新的数据
         this.$http({
           url: this.$http.adornUrl('/booking/record/basicLineChartOut'),
-          method: "get"
+          method: "get",
+          params: {"type":"mouth","inOut": "支出"}
           })
           .then(({ data }) => {
             //请求成功            
@@ -239,8 +240,9 @@
       initChartLineIn () {
         this.chartLineIn = echarts.init(document.getElementById('J_chartLineBoxIn'))        
         this.$http({
-          url: this.$http.adornUrl('/booking/record/basicLineChartIn'),
-          method: "get"
+          url: this.$http.adornUrl('/booking/record/basicLineChartOut'),
+          method: "get",
+          params: {"type":"mouth","inOut": "收入"}
           })
           .then(({ data }) => {
             for(var i=0;i<data.data.name.length;i++){
@@ -261,8 +263,9 @@
         initChartLine () {
         this.chartLine = echarts.init(document.getElementById('J_chartLineBox'))        
         this.$http({
-        url: this.$http.adornUrl('/booking/record/basicLineChartIn'),
-        method: "get"
+        url: this.$http.adornUrl('/booking/record/basicLineChartOut'),
+        method: "get",
+        params: {"type":"mouth","inOut": "支出"}
         })
         .then(({ data }) => {
           // for(var i=0;i<data.data.name.length;i++){

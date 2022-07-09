@@ -99,7 +99,7 @@
  maxLength='9'></el-input>
     </el-form-item>
     <el-form-item label="数量" prop="quantity">
-      <el-input-number :min="0.1" :step="0.1" v-model="dataForm.quantity" placeholder="请输入正整数或小数，最多6位小数，支出数量,购买数量,使用数量"  oninput="if(isNaN(value)) { value = null } if(value.indexOf('.')>0){value=value.slice(0,value.indexOf('.')+8)}"
+      <el-input-number :min="1" :step="0.1" v-model="dataForm.quantity" placeholder="请输入正整数或小数，最多6位小数，支出数量,购买数量,使用数量"  oninput="if(isNaN(value)) { value = null } if(value.indexOf('.')>0){value=value.slice(0,value.indexOf('.')+8)}"
  maxLength='9'></el-input-number>
     </el-form-item>
 
