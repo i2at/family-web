@@ -59,13 +59,15 @@
         header-align="center"
         align="center"
         label="排序">
-      </el-table-column>
+      </el-table-column> -->
+
       <el-table-column
         prop="icon"
         header-align="center"
         align="center"
-        label="图标地址">
+        label="说明">
       </el-table-column>
+      <!-- 
       <el-table-column
         prop="productUnit"
         header-align="center"

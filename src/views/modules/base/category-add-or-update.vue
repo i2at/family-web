@@ -32,10 +32,12 @@
     </el-form-item>
     <el-form-item label="排序" prop="sort">
       <el-input v-model="dataForm.sort" placeholder="排序"></el-input>
-    </el-form-item>
+    </el-form-item> -->
+
     <el-form-item label="图标地址" prop="icon">
       <el-input v-model="dataForm.icon" placeholder="图标地址"></el-input>
     </el-form-item>
+    <!-- 
     <el-form-item label="计量单位" prop="productUnit">
       <el-input v-model="dataForm.productUnit" placeholder="计量单位"></el-input>
     </el-form-item>
@@ -84,7 +86,7 @@
             { required: true, message: '排序不能为空', trigger: 'blur' }
           ],
           icon: [
-            { required: true, message: '图标地址不能为空', trigger: 'blur' }
+            { required: false, message: '图标地址不能为空', trigger: 'blur' }
           ],
           productUnit: [
             { required: true, message: '计量单位不能为空', trigger: 'blur' }

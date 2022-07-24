@@ -42,7 +42,7 @@
         chartScatter: null,
         option: {
           title: {
-            text: '总消费-分类占比',
+            text: '总消费',
             subtext: '单位:元',
             left: 'center'
           },
@@ -87,7 +87,7 @@
         chartScatterMouth: null,
         optionMouth: {
           title: {
-            text: '月消费-分类占比',
+            text: '月消费',
             subtext: '单位:元',
             left: 'center'
           },
